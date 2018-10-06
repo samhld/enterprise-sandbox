@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  # Meta nodes
+  meta-node1:
+    image: influxdb:1.6.3-meta
+    volumes:
+      - ./meta-nodes/data:/var/lib/influxdb
+#      - ./meta-nodes/data/config/:/etc/influxdb
+    env_file:
+      - variables.env
+    ports:
+    # Meta nodes communicate ovet ports 8088, 8089, and 8091
+    - "18088:8088"
+    - "18089:8089"
+    # UDP Port
+    - "18091:8091"
+
+  meta-node2:
+    image: influxdb:1.6.3-meta
+    volumes:
+      # Mount meta directory
+      - ./meta-nodes/data:/var/lib/influxdb
+#      - ./meta-nodes/data/config/:/etc/influxdb
+    env_file:
+      - variables.env
+    ports:
+    - "28088:8088"
+    - "28089:8089"
+    - "28091:8091"
+
+  meta-node3:
+    image: influxdb:1.6.3-meta
+    volumes:
+      - ./meta-nodes/data:/var/lib/influxdb
+#      - ./meta-nodes/data/config/:/etc/influxdb
+    env_file:
+      - variables.env
+    ports:
+    - "38088:8088"
+    - "38089:8089"
+    - "38091:8091"
+
+  # Data nodes
+  data-node1:
+    image: influxdb:1.6.3-data
+    volumes:
+      # Mount data directory
+      - ./data-nodes/data:/var/lib/influxdb
+#      - ./data-nodes/config/:/etc/influxdb
+    env_file:
+      - variables.env
+    ports:
+      - "18086:8086"
+      - "18082:8082"
+
+  data-node2:
+    image: influxdb:1.6.3-data
+    volumes:
+      - ./data-nodes/data:/var/lib/influxdb
+#      - ./data-nodes/config/:/etc/influxdb
+    env_file:
+      - variables.env
+    ports:
+      - "28086:8086"
+      - "28082:8082"
