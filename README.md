@@ -5,6 +5,7 @@ This is a two-command spinup of an InfluxEnterprise cluster in Docker.  The inte
 ## Requirements:
 * Docker on your local machine
 * An active InfluxEnterprise license key
+
 ** Note: you can either a) obtain a trial license by signing up here: https://portal.influxdata.com/users/new, or b) contact sales here: https://www.influxdata.com/contact-sales/**
 
 
