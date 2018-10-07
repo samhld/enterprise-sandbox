@@ -6,7 +6,7 @@ services:
     image: influxdb:1.6.3-meta
     volumes:
       - ./meta-nodes/data:/var/lib/influxdb
-#      - ./meta-nodes/data/config/:/etc/influxdb
+      - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
     ports:
@@ -21,7 +21,7 @@ services:
     volumes:
       # Mount meta directory
       - ./meta-nodes/data:/var/lib/influxdb
-#      - ./meta-nodes/data/config/:/etc/influxdb
+      - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
     ports:
@@ -33,7 +33,7 @@ services:
     image: influxdb:1.6.3-meta
     volumes:
       - ./meta-nodes/data:/var/lib/influxdb
-#      - ./meta-nodes/data/config/:/etc/influxdb
+      - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
     ports:
@@ -47,7 +47,7 @@ services:
     volumes:
       # Mount data directory
       - ./data-nodes/data:/var/lib/influxdb
-#      - ./data-nodes/config/:/etc/influxdb
+      - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
     ports:
@@ -58,7 +58,7 @@ services:
     image: influxdb:1.6.3-data
     volumes:
       - ./data-nodes/data:/var/lib/influxdb
-#      - ./data-nodes/config/:/etc/influxdb
+      - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
     ports:
