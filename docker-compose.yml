@@ -4,6 +4,7 @@ services:
   # Meta nodes
   meta-node1:
     image: influxdb:1.6.3-meta
+    container_name: meta1
     volumes:
       - ./meta-nodes/data:/var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
@@ -18,6 +19,7 @@ services:
 
   meta-node2:
     image: influxdb:1.6.3-meta
+    container_name: meta2
     volumes:
       # Mount meta directory
       - ./meta-nodes/data:/var/lib/influxdb
@@ -30,6 +32,7 @@ services:
     - "28091:8091"
 
   meta-node3:
+    container_name: meta3
     image: influxdb:1.6.3-meta
     volumes:
       - ./meta-nodes/data:/var/lib/influxdb
@@ -44,6 +47,7 @@ services:
   # Data nodes
   data-node1:
     image: influxdb:1.6.3-data
+    container_name: data1
     volumes:
       # Mount data directory
       - ./data-nodes/data:/var/lib/influxdb
@@ -56,6 +60,7 @@ services:
 
   data-node2:
     image: influxdb:1.6.3-data
+    container_name: data2
     volumes:
       - ./data-nodes/data:/var/lib/influxdb
       - ./data-nodes/config/:/etc/influxdb
