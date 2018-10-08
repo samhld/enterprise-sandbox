@@ -6,7 +6,7 @@ services:
     image: influxdb:1.6.3-meta
     container_name: meta1
     volumes:
-      - ./meta-nodes/data:/var/lib/influxdb
+      - ./meta-nodes/meta1:/var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -22,7 +22,7 @@ services:
     container_name: meta2
     volumes:
       # Mount meta directory
-      - ./meta-nodes/data:/var/lib/influxdb
+      - ./meta-nodes/meta2:/var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -35,7 +35,7 @@ services:
     container_name: meta3
     image: influxdb:1.6.3-meta
     volumes:
-      - ./meta-nodes/data:/var/lib/influxdb
+      - ./meta-nodes/meta3:/var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -50,7 +50,7 @@ services:
     container_name: data1
     volumes:
       # Mount data directory
-      - ./data-nodes/data:/var/lib/influxdb
+      - ./data-nodes/data1:/var/lib/influxdb
       - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -62,7 +62,7 @@ services:
     image: influxdb:1.6.3-data
     container_name: data2
     volumes:
-      - ./data-nodes/data:/var/lib/influxdb
+      - ./data-nodes/data2:/var/lib/influxdb
       - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
