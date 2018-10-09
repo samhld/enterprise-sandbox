@@ -2,13 +2,45 @@ version: '3'
 
 services:
   nginx:
-    container_name: nginx
     image: nginx:1.15.5-alpine
+    container_name: nginx
     volumes:
       - ./nginx-conf:/etc/nginx/
     ports:
-      - "8090:80"
+      - "8086:8086"
       - "443:443"
+    expose:
+      - "8086"
+  telegraf:
+    image: telegraf:latest
+    container_name: telegraf
+    environment:
+      HOSTNAME: "Sam-local-machine"
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+  # Mount for docker API access
+      - /var/run/docker.sock:/var/run/docker.sock
+  telegraf-monitor1:
+    image: telegraf:latest
+    container_name: telegraf-monitor1
+    env_file: ./monitor/telegraf-monitor1/variables.env
+    volumes:
+      - ./monitor/telegraf-monitor1/telegraf.conf:/etc/telegraf/telegraf.conf
+  # Mount for docker API access
+      - /var/run/docker.sock:/var/run/docker.sock
+  # Mounts for `filecount` directory access
+      - ./data-nodes/data1
+      - ./data-nodes/data2
+  telegraf-monitor2:
+    image: telegraf:latest
+    container_name: telegraf-monitor2
+    volumes:
+      - ./monitor/telegraf-monitor2/telegraf.conf:/etc/telegraf/telegraf.conf
+  # Mount for docker API access
+      - /var/run/docker.sock:/var/run/docker.sock
+  # Mounts for `filecount` directory access
+      - ./data-nodes/data1
+      - ./data-nodes/data2
   # Meta nodes
   meta-node1:
     image: influxdb:1.6.3-meta
@@ -21,7 +53,7 @@ services:
     environment:
       - INFLUXDB_HOSTNAME=meta1
     ports:
-    # Meta nodes communicate ovet ports 8088, 8089, and 8091
+  # Meta nodes communicate ovet ports 8088, 8089, and 8091
     - "18088:8088"
     - "18089:8089"
     # UDP Port
@@ -31,7 +63,7 @@ services:
     image: influxdb:1.6.3-meta
     container_name: meta2
     volumes:
-      # Mount meta directory
+  # Mount meta directory
       - ./meta-nodes/meta2:/var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
@@ -87,3 +119,32 @@ services:
     ports:
       - "28086:8086"
       - "28082:8082"
+
+  influxdb-monitor:
+  # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
+    image: influxdb:latest
+    container_name: influxdb-monitor
+    volumes:
+    # Mount for influxdb data directory
+    - ./monitor/influxdb-monitor/data:/var/lib/influxdb
+    # Mount for influxdb configuration
+    - ./monitor/influxdb-monitor/config/:/etc/influxdb/
+    ports:
+    # The API for InfluxDB is served on port 8086
+    - "48086:8086"
+    - "48082:8082"
+    # UDP Port
+    - "48089:8089"
+
+  chronograf:
+  # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
+    image: chronograf:latest
+    container_name: chronograf
+    environment:
+      RESOURCES_PATH: "/usr/share/chronograf/resources"
+    volumes:
+    # Mount for chronograf database
+      - ./chronograf/data/:/var/lib/chronograf/
+    ports:
+    # The WebUI for Chronograf is served on port 8888
+      - "8888:8888"
