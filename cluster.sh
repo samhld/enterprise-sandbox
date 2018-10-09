@@ -11,6 +11,6 @@ docker exec meta1 bash -c influxd-ctl show
 echo "Joining data nodes to cluster..."
 # Join data nodes to cluster
 docker exec meta1 influxd-ctl add-data data1:8088
-docker exec meta1 influxd-ctl add-data data1:8088
+docker exec meta1 influxd-ctl add-data data2:8088
 
 echo "Cluster successfully created"

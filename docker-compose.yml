@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.15.5-alpine
+    volumes:
+      - ./nginx-conf:/etc/nginx/
+    ports:
+      - "8090:80"
+      - "443:443"
   # Meta nodes
   meta-node1:
     image: influxdb:1.6.3-meta
@@ -10,6 +18,8 @@ services:
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
+    environment:
+      - INFLUXDB_HOSTNAME=meta1
     ports:
     # Meta nodes communicate ovet ports 8088, 8089, and 8091
     - "18088:8088"
@@ -26,6 +36,8 @@ services:
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
+    environment:
+      - INFLUXDB_HOSTNAME=meta2
     ports:
     - "28088:8088"
     - "28089:8089"
@@ -39,6 +51,8 @@ services:
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
+    environment:
+      - INFLUXDB_HOSTNAME=meta3
     ports:
     - "38088:8088"
     - "38089:8089"
@@ -54,6 +68,8 @@ services:
       - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
+    environment:
+      - INFLUXDB_HOSTNAME=data1
     ports:
       - "18086:8086"
       - "18082:8082"
@@ -66,6 +82,8 @@ services:
       - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
+    environment:
+      - INFLUXDB_HOSTNAME=data2
     ports:
       - "28086:8086"
       - "28082:8082"
