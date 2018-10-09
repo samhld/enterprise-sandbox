@@ -26,6 +26,16 @@ This is a two-command spinup of an InfluxEnterprise cluster in Docker.  The inte
 
 To check that your cluster truly is created successfully:
 
-* Run `docker exec meta1 bash -c "influxd-ctl show"`
+* Run `docker exec meta1 bash -c "influxd-ctl show"` 
+
+## Chronograf ##
+
+An instance of Chronograf should spin up in your browser automatically.  If it does not, navigate to http://localhost:8888.
+
+
+
+For reference: [Chronograf README](https://github.com/influxdata/chronograf/blob/master/README.md)
+
+
 
 That's it!
