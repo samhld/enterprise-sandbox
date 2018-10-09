@@ -1,15 +1,5 @@
 # enterprise-sandbox
 
-(to be completed:
-
-  1) add nginx container for load balancing and perhaps Kafka?
-
-  2) add Telegraf instance for monitoring local machine and nginx (and Kafka?)
-
-  3) add OSS InfluxDB and Telegraf for monitoring each node in the Cluster
-
-This is a two-command spinup of an InfluxEnterprise cluster in Docker.  The intent behind this is be a sandbox to test InfluxEnterprise cluster features and capabilities on your local machine quickly and easily.
-
 ## Requirements:
 * Docker on your local machine
 * An active InfluxEnterprise license key
