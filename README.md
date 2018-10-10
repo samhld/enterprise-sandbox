@@ -1,4 +1,4 @@
-# enterprise-sandbox
+# Enterprise-sandbox
 
 Below is a diagram of what this sandbox sets up for you automatically:
 <p align="center">
