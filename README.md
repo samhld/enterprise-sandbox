@@ -19,9 +19,11 @@ Below is a diagram of what this sandbox sets up for you automatically:
 * Run `chmod 777 cluster.sh`
 * Run `./cluster.sh`
 
-To check that your cluster truly is created successfully:
+You should see the following output:
 
-* Run `docker exec meta1 bash -c "influxd-ctl show"`
+<p align="center">
+  <img src="https://github.com/samhld/enterprise-sandbox/blob/master/readme_images/cluster.png"/>
+</p>
 
 ## Chronograf ##
 
