@@ -1,5 +1,10 @@
 # enterprise-sandbox
 
+Below is a diagram of what this sandbox sets up for you automatically:
+<p align="center">
+  <img src="https://github.com/samhld/enterprise-sandbox/blob/master/readme_images/ent-sandbox.png"/>
+</p>
+
 ## Requirements:
 * Docker on your local machine
 * An active InfluxEnterprise license key
