@@ -4,3 +4,4 @@
 ./meta-nodes/meta2
 ./meta-nodes/meta3
 ./monitor/influxdb-monitor/data
+./license_key
