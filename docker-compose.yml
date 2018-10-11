@@ -29,8 +29,8 @@ services:
   # Mount for docker API access
       - /var/run/docker.sock:/var/run/docker.sock
   # Mounts for `filecount` directory access
-      - ./data-nodes/data1
-      - ./data-nodes/data2
+      - ./data-nodes/data1/data:/var/lib/influxdb/data
+      - ./data-nodes/data2/data:/var/lib/influxdb/data
   # telegraf-monitor2:
   #   image: telegraf:latest
   #   container_name: telegraf-monitor2
