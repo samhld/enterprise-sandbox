@@ -2,7 +2,7 @@
 
 Below is a diagram of what this sandbox sets up for you automatically:
 <p align="center">
-  <img src="https://github.com/samhld/enterprise-sandbox/blob/master/readme_images/ent-sandbox-2.png"/>
+  <img src="https://github.com/samhld/enterprise-sandbox/blob/master/readme_images/ent-sandbox-diagram.png"/>
 </p>
 
 ## Requirements:
