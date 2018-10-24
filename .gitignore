@@ -1,7 +1,7 @@
-./data-nodes/data1
-./data-nodes/data2
-./meta-nodes/meta1
-./meta-nodes/meta2
-./meta-nodes/meta3
-./monitor/influxdb-monitor/data
-./license_key
+data-nodes/data1
+data-nodes/data2
+meta-nodes/meta1
+meta-nodes/meta2
+meta-nodes/meta3
+monitor/influxdb-monitor/data
+variables.env
