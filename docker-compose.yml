@@ -31,17 +31,6 @@ services:
   # Mounts for `filecount` directory access
       - ./data-nodes/data1/data:/var/lib/influxdb/data
       - ./data-nodes/data2/data:/var/lib/influxdb/data
-  # telegraf-monitor2:
-  #   image: telegraf:latest
-  #   container_name: telegraf-monitor2
-  #   volumes:
-  #     - ./monitor/telegraf-monitor2/telegraf.conf:/etc/telegraf/telegraf.conf
-  # # Mount for docker API access
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  # # Mounts for `filecount` directory access
-  #     - ./data-nodes/data1
-  #     - ./data-nodes/data2
-  # Meta nodes
   meta-node1:
     image: influxdb:1.6.3-meta
     container_name: meta1
