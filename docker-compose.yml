@@ -94,6 +94,8 @@ services:
     ports:
       - "18086:8086"
       - "18082:8082"
+    expose:
+      - "8086"
 
   data-node2:
     image: influxdb:1.6.3-data
@@ -108,6 +110,8 @@ services:
     ports:
       - "28086:8086"
       - "28082:8082"
+    expose:
+      - "8086"
 
   influxdb-monitor:
   # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
