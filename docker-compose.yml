@@ -12,7 +12,7 @@ services:
     expose:
       - "8086"
   telegraf:
-    image: telegraf:latest
+    image: telegraf:1.9.4
     container_name: telegraf
     environment:
       HOSTNAME: "Sam-local-machine"
@@ -21,7 +21,7 @@ services:
   # Mount for docker API access
       - /var/run/docker.sock:/var/run/docker.sock
   telegraf-monitor1:
-    image: telegraf:latest
+    image: telegraf:1.9.4
     container_name: telegraf-monitor1
     env_file: ./monitor/telegraf-monitor1/variables.env
     volumes:
@@ -32,7 +32,7 @@ services:
       - ./data-nodes/data1/data:/var/lib/influxdb/data
       - ./data-nodes/data2/data:/var/lib/influxdb/data
   meta-node1:
-    image: influxdb:1.6.3-meta
+    image: influxdb:1.7.3-meta
     container_name: meta1
     volumes:
       - ./meta-nodes/meta1:/var/lib/influxdb
@@ -49,7 +49,7 @@ services:
     - "18091:8091"
 
   meta-node2:
-    image: influxdb:1.6.3-meta
+    image: influxdb:1.7.3-meta
     container_name: meta2
     volumes:
   # Mount meta directory
@@ -66,7 +66,7 @@ services:
 
   meta-node3:
     container_name: meta3
-    image: influxdb:1.6.3-meta
+    image: influxdb:1.7.3-meta
     volumes:
       - ./meta-nodes/meta3:/var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
@@ -81,7 +81,7 @@ services:
 
   # Data nodes
   data-node1:
-    image: influxdb:1.6.3-data
+    image: influxdb:1.7.3-data
     container_name: data1
     volumes:
       # Mount data directory
@@ -98,7 +98,7 @@ services:
       - "8086"
 
   data-node2:
-    image: influxdb:1.6.3-data
+    image: influxdb:1.7.3-data
     container_name: data2
     volumes:
       - ./data-nodes/data2:/var/lib/influxdb
@@ -115,7 +115,7 @@ services:
 
   influxdb-monitor:
   # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
-    image: influxdb:latest
+    image: influxdb:1.7.3
     container_name: influxdb-monitor
     volumes:
     # Mount for influxdb data directory
@@ -131,7 +131,7 @@ services:
 
   chronograf:
   # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
-    image: chronograf:latest
+    image: chronograf:1.7.7
     container_name: chronograf
     environment:
       RESOURCES_PATH: "/usr/share/chronograf/resources"
