@@ -5,14 +5,14 @@ services:
     image: nginx:1.15.5-alpine
     container_name: nginx
     volumes:
-      - ./nginx-conf:/etc/nginx/
+      - ./nginx-conf/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "8086:8086"
       - "443:443"
     expose:
       - "8086"
   telegraf:
-    image: telegraf:1.9.4
+    image: telegraf:1.11.3
     container_name: telegraf
     environment:
       HOSTNAME: "Sam-local-machine"
@@ -21,7 +21,7 @@ services:
   # Mount for docker API access
       - /var/run/docker.sock:/var/run/docker.sock
   telegraf-monitor1:
-    image: telegraf:1.9.4
+    image: telegraf:1.11.3
     container_name: telegraf-monitor1
     env_file: ./monitor/telegraf-monitor1/variables.env
     volumes:
