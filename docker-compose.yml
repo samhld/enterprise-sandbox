@@ -29,8 +29,8 @@ services:
   # Mount for docker API access
       - /var/run/docker.sock:/var/run/docker.sock
   # Mounts for `filecount` directory access
-      - ./data-nodes/data1/data:/var/lib/influxdb/data
-      - ./data-nodes/data2/data:/var/lib/influxdb/data
+      - ./data-nodes/data1/data:/var/lib/influxdb/data/1
+      - ./data-nodes/data2/data:/var/lib/influxdb/data/2
   meta-node1:
     image: influxdb:1.7.7-meta
     container_name: meta1
@@ -85,7 +85,7 @@ services:
     container_name: data1
     volumes:
       # Mount data directory
-      - ./data-nodes/data1:/var/lib/influxdb
+      - ./data-nodes/data1:/var/lib/influxdb/1
       - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -101,7 +101,7 @@ services:
     image: influxdb:1.7.7-data
     container_name: data2
     volumes:
-      - ./data-nodes/data2:/var/lib/influxdb
+      - ./data-nodes/data2:/var/lib/influxdb/2
       - ./data-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
