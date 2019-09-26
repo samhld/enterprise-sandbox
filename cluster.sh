@@ -6,7 +6,7 @@ docker exec meta1 influxd-ctl add-meta meta1:8091
 docker exec meta1 influxd-ctl add-meta meta2:8091
 docker exec meta1 influxd-ctl add-meta meta3:8091
 
-docker exec meta1 bash -c influxd-ctl show
+docker exec meta1 bash -c "influxd-ctl show"
 
 echo "Joining data nodes to cluster..."
 # Join data nodes to cluster
@@ -25,4 +25,5 @@ else
   echo "no browser detected..."
 fi
 
+sleep 2
 docker exec meta1 bash -c "influxd-ctl show"

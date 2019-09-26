@@ -15,7 +15,7 @@ services:
     image: telegraf:1.11.3
     container_name: telegraf
     environment:
-      HOSTNAME: "Sam-local-machine"
+      HOSTNAME: "local-machine"
     volumes:
       - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
   # Mount for docker API access
