@@ -2,14 +2,15 @@ version: '3'
 
 services:
   nginx:
-    image: nginx:1.16.0-alpine
+    image: nginx:1.18.0-alpine
     container_name: nginx
     volumes:
       - ./nginx-conf/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx-conf/cache:/data/nginx/cache
+      # - ./nginx-conf/cache:/data/nginx/cache
     ports:
       - "8086:8086"
       - "443:443"
+      
     expose:
       - "8086"
   telegraf:
@@ -36,7 +37,7 @@ services:
     image: influxdb:meta
     container_name: meta1
     volumes:
-      - ./meta-nodes/meta1:/var/lib/influxdb
+      - /var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -54,7 +55,7 @@ services:
     container_name: meta2
     volumes:
   # Mount meta directory
-      - ./meta-nodes/meta2:/var/lib/influxdb
+      - /var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -69,7 +70,7 @@ services:
     container_name: meta3
     image: influxdb:meta
     volumes:
-      - ./meta-nodes/meta3:/var/lib/influxdb
+      - /var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
     env_file:
       - variables.env
@@ -85,9 +86,8 @@ services:
     image: influxdb:data
     container_name: data1
     volumes:
-      # Mount data directory
-      - ./data-nodes/data1:/var/lib/influxdb/1
-      - ./data-nodes/config/:/etc/influxdb
+      - /var/lib/influxdb/
+      - ./data-nodes/data1/influxdb.conf:/etc/influxdb/influxdb.conf
     env_file:
       - variables.env
     environment:
@@ -102,8 +102,8 @@ services:
     image: influxdb:data
     container_name: data2
     volumes:
-      - ./data-nodes/data2:/var/lib/influxdb/2
-      - ./data-nodes/config/:/etc/influxdb
+      - /var/lib/influxdb/
+      - ./data-nodes/data1/influxdb.conf:/etc/influxdb/influxdb.conf
     env_file:
       - variables.env
     environment:
@@ -132,7 +132,7 @@ services:
 
   chronograf:
   # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
-    image: chronograf:1.7.12
+    image: chronograf:latest
     container_name: chronograf
     environment:
       RESOURCES_PATH: "/usr/share/chronograf/resources"
