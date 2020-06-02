@@ -1,4 +1,11 @@
-data-nodes/data1
+data-nodes/data1/data
+data-nodes/data1/meta
+data-nodes/data1/hh
+data-nodes/data1/wal
+data-nodes/data2/data
+data-nodes/data2/meta
+data-nodes/data2/hh
+data-nodes/data2/wal
 data-nodes/data2
 meta-nodes/meta1
 meta-nodes/meta2
