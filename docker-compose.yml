@@ -2,17 +2,18 @@ version: '3'
 
 services:
   nginx:
-    image: nginx:1.15.5-alpine
+    image: nginx:1.16.0-alpine
     container_name: nginx
     volumes:
       - ./nginx-conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx-conf/cache:/data/nginx/cache
     ports:
       - "8086:8086"
       - "443:443"
     expose:
       - "8086"
   telegraf:
-    image: telegraf:1.11.3
+    image: telegraf:latest
     container_name: telegraf
     environment:
       HOSTNAME: "local-machine"
@@ -21,7 +22,7 @@ services:
   # Mount for docker API access
       - /var/run/docker.sock:/var/run/docker.sock
   telegraf-monitor1:
-    image: telegraf:1.11.3
+    image: telegraf:latest
     container_name: telegraf-monitor1
     env_file: ./monitor/telegraf-monitor1/variables.env
     volumes:
@@ -32,7 +33,7 @@ services:
       - ./data-nodes/data1/data:/var/lib/influxdb/data/1
       - ./data-nodes/data2/data:/var/lib/influxdb/data/2
   meta-node1:
-    image: influxdb:1.7.7-meta
+    image: influxdb:meta
     container_name: meta1
     volumes:
       - ./meta-nodes/meta1:/var/lib/influxdb
@@ -49,7 +50,7 @@ services:
     - "18091:8091"
 
   meta-node2:
-    image: influxdb:1.7.7-meta
+    image: influxdb:meta
     container_name: meta2
     volumes:
   # Mount meta directory
@@ -66,7 +67,7 @@ services:
 
   meta-node3:
     container_name: meta3
-    image: influxdb:1.7.7-meta
+    image: influxdb:meta
     volumes:
       - ./meta-nodes/meta3:/var/lib/influxdb
       - ./meta-nodes/config/:/etc/influxdb
@@ -81,7 +82,7 @@ services:
 
   # Data nodes
   data-node1:
-    image: influxdb:1.7.7-data
+    image: influxdb:data
     container_name: data1
     volumes:
       # Mount data directory
@@ -98,7 +99,7 @@ services:
       - "8086"
 
   data-node2:
-    image: influxdb:1.7.7-data
+    image: influxdb:data
     container_name: data2
     volumes:
       - ./data-nodes/data2:/var/lib/influxdb/2
